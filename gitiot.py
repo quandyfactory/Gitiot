@@ -62,7 +62,7 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
     if 1 == 1:
         with open(exclude_file, 'r') as file:
             contents = file.read()
-        if config_file in contents:
+        if config_file not in contents:
             with open(exclude_file, 'a') as file:
                 file.write('%s\n' % config_file)
     #except:
