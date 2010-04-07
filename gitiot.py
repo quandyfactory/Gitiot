@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__title__ = 'Gitiot: The one-button git commit GUI.'
+__title__ = 'Gitiot - The one-button git commit GUI'
 __version__ = 0.1
 __author__ = "Ryan McGreal ryan@quandyfactory.com"
 __homepage__ = "http://quandyfactory.com/projects/49/gitiot"
@@ -27,7 +27,7 @@ def make_process(command, repo_dir):
     pipe.wait()
     return
 
-def get_config(repo_dir=os.path.abspath(os.curdir), master='', config_file = 'gitiot.config'):
+def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file = 'gitiot.config'):
     """
     Returns a config dictionary with repo_dir and master and manages values in a config file.
     """
@@ -46,14 +46,7 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='', config_file = 'gi
             config['master'] = master
             
     except:
-        # add repo_dir to config
-        if repo_dir == '':
-            repo_dir = raw_input('Enter repo directory: ')
         config['repo_dir'] = repo_dir.strip()
-        
-        # add master to config
-        if master == '':
-            master = raw_input('Enter alias for remote master: ')
         config['master'] = master.strip()
 
     # try to save the config values for next time
@@ -93,12 +86,12 @@ class App:
         self.comment_label = Label(f, text="Comment")
         self.comment_label.pack(side=TOP, padx=10, pady=0)
         
-        self.comment = Text(f, width=36, height=4)
+        self.comment = Text(f, width=60, height=6)
         self.comment.pack(side=TOP, padx=10, pady=0)
         self.comment.insert(1.0, commit_comment)
         
         self.button = Button(f, text="Commit", command=self.execute_commit)
-        self.button.pack(side=BOTTOM, padx=10, pady=10)
+        self.button.pack(side=BOTTOM, padx=20, pady=20)
     
     def execute_commit(self):
         """
