@@ -106,5 +106,5 @@ Gitiot is designed to be used by people who don't want to use the command line, 
 
 ##Credits
 
-Special thanks for [@adr](http://twitter.adr) for inspiring me to write this in his [cri du coeur](http://twitter.com/adr/status/11716000425) regarding making git accessible to non-techies.
+Special thanks for [@adr](http://twitter.com/adr) for inspiring me to write this in his [cri du coeur](http://twitter.com/adr/status/11716000425) regarding making git accessible to non-techies.
 
