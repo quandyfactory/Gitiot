@@ -56,7 +56,19 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
                 file.write('%s: %s\n' % (key, val))
     except:
         print 'Could not save config values.'
-        
+    
+    # try to add config_file to the git exclude
+    exclude_file = '%s/.git/info/exclude' % (repo_dir)
+    try:
+        with open(exclude_file, 'r') as file:
+            contents = file.readall()
+        if config_file in contents:
+            with open(exclude_file, 'a') as file:
+                file.write('%s\n' % config_file)
+    except:
+        # hey, it was worth a shot
+        pass
+    
     return config
 
 def git_add(repo_dir):
