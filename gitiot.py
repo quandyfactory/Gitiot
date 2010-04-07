@@ -1,48 +1,52 @@
 # standard libraries
 import os
 import sys
-import
+import subprocess
 
-# 3rd party libraries
-import git
+def make_process(command):
 
-# initialize git config dictionary
-config = {} 
+def get_config(repo_dir='', master='', config_file = 'gitiot.config'):
+    """
+    Returns a config dictionary with repo_dir and master and manages values in a config file.
+    """
+    config = {} # initialize config dict
 
-# get config values
-try:
-    with open('gitiot.config', 'r') as file:
-        contents = file.readall()
-        lines = [line for line in contents if line.strip() != '' and ':']
-        for line in lines:
-            key, val = line.split(':')
-            config[key.strip()] = val.strip()
-except:
-    config['repo_dir'] = raw_input('Enter repo directory: ')
-    config['master'] = raw_input('Enter master alias: ')
-    with open('gitiot.config', 'w') as file:
-        for key, val in config.items():
-            file.write('%s: %s\n' % (key, val))
+    try:
+        with open(config_file, 'r') as file:
+            contents = file.readall()
+            lines = [line for line in contents if line.strip() != '' and ':']
+            for line in lines:
+                key, val = line.split(':')
+                config[key.strip()] = val.strip()
+        if repo_dir != '':
+            config['repo_dir'] = repo_dir
+        if master != '':
+            config['master'] = master
+            
+    except:
+        # add repo_dir to config
+        if repo_dir == '':
+            repo_dir = raw_input('Enter repo directory: ')
+        config['repo_dir'] = raw_input.strip()
+        
+        # add master to config
+        if master == '':
+            master = raw_input('Enter master alias: ')
+        config['master'] = master.strip()
 
-try:
-    repo_dir = config['repo_dir'].strip()
-except KeyError:
-    repo_dir = os.path.abspath(os.curdir)
+    # try to save the config values for next time
+    try:
+        with open(config_file, 'w') as file:
+            for key, val in config.items():
+                file.write('%s: %s\n' % (key, val))
+    except:
+        print 'Could not save config values.'
+        
+    return config
 
-try:
-    master = config['master'].strip()
-except KeyError:
-    master = ''
-
-repo = git.Repo(repo_dir)
-
-commits = repo.commits()
-
-tree = commits[0].tree
-
-files = [item[0] for item in tree.items()]
-
-for fi in files: 
-    print fi
+def git_add():
+    """
+    Recursively adds all the 
+    """
     
 
