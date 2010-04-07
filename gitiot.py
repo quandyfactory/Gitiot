@@ -35,7 +35,7 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
 
     try:
         with open(config_file, 'r') as file:
-            contents = file.readall()
+            contents = file.read()
             lines = [line for line in contents if line.strip() != '' and ':' in line and line.strip()[0] != '#']
             for line in lines:
                 key, val = line.split(':')
@@ -59,15 +59,15 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
     
     # try to add config_file to the git exclude
     exclude_file = '%s/.git/info/exclude' % (repo_dir)
-    try:
+    if 1 == 1:
         with open(exclude_file, 'r') as file:
-            contents = file.readall()
+            contents = file.read()
         if config_file in contents:
             with open(exclude_file, 'a') as file:
                 file.write('%s\n' % config_file)
-    except:
-        # hey, it was worth a shot
-        pass
+    #except:
+    #    # hey, it was worth a shot
+    #    pass
     
     return config
 
