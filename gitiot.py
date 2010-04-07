@@ -59,15 +59,15 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
     
     # try to add config_file to the git exclude
     exclude_file = '%s/.git/info/exclude' % (repo_dir)
-    if 1 == 1:
+    try:
         with open(exclude_file, 'r') as file:
             contents = file.read()
         if config_file not in contents:
             with open(exclude_file, 'a') as file:
                 file.write('%s\n' % config_file)
-    #except:
-    #    # hey, it was worth a shot
-    #    pass
+    except:
+        # hey, it was worth a shot
+        pass
     
     return config
 
