@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 __title__ = 'Gitiot, the one-button git commit GUI'
-__version__ = 0.11
+__version__ = 0.12
 __author__ = "Ryan McGreal ryan@quandyfactory.com"
 __homepage__ = "http://quandyfactory.com/projects/49/gitiot"
 __copyright__ = "(C) 2009 by Ryan McGreal. Licenced under GNU GPL 2.0\nhttp://www.gnu.org/licenses/old-licenses/gpl-2.0.html"
@@ -110,10 +110,15 @@ class App:
         self.comment = Text(f, width=60, height=6)
         self.comment.pack(side=TOP, padx=10, pady=0)
         self.comment.insert(1.0, global_commit_comment)
+        self.comment.bind("<Tab>", self.focus_next_window)
         
         self.button = Button(f, text="Commit", command=self.execute_commit)
         self.button.pack(side=BOTTOM, padx=20, pady=20)
     
+    def focus_next_window(self, event):
+        event.widget.tk_focusNext().focus()
+        return("break")
+
     def execute_commit(self):
         """
         Commits the changes to the repository
