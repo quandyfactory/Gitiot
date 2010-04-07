@@ -137,6 +137,6 @@ if __name__ == '__main__':
         root.wm_iconbitmap('%s/%s' % (os.path.abspath(os.curdir), 'git_icon.bmp'))
     except:
         pass
-
     app = App(root)
     root.mainloop()
+    
