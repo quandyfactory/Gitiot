@@ -11,10 +11,19 @@ Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful
 
 ###This Version
 
-* Version: 0.1
-* Release Date: 2010-04-06
+* Version: 0.11
+* Release Date: 2010-04-07
 
 ###Revision History
+
+####Version 0.11
+
+* Release Date: 2010-04-07
+* Changes:
+    * Split config functions into get_config() and set_config()
+    * Created global default variables for repo_dir, config file and named remote (master)
+    * Fixed get_config() bug that wasn't splitting config file contents into a list of lines
+    * Added an icon that apparently only works in Windows
 
 ####Version 0.1
 

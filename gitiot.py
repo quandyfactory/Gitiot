@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-__title__ = 'Gitiot - The one-button git commit GUI'
-__version__ = 0.1
+__title__ = 'Gitiot, the one-button git commit GUI'
+__version__ = 0.11
 __author__ = "Ryan McGreal ryan@quandyfactory.com"
 __homepage__ = "http://quandyfactory.com/projects/49/gitiot"
 __copyright__ = "(C) 2009 by Ryan McGreal. Licenced under GNU GPL 2.0\nhttp://www.gnu.org/licenses/old-licenses/gpl-2.0.html"
