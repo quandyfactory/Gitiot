@@ -42,8 +42,9 @@ Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful
 You need to have the following installed to run this program:
 
 * [Python](http://www.python.org/download) 2.5.x or 2.6.x
+    * **Note:** On some Linux distros, you may need to install python-tk - just install it using your system's package manager.
 * [Git]() (POSIX) or [Msysgit](http://code.google.com/p/msysgit/) (Windows)
-    * **Note:** if using Msysgit on Windows, you must select the "Run Git from the Windows Command Prompt" option under *Adjusting your PATH environment* during installation. 
+    * **Note:** If using Msysgit on Windows, you must select the "Run Git from the Windows Command Prompt" option under *Adjusting your PATH environment* during installation. 
 
 Otherwise, Gitiot has no additional dependencies.
 
