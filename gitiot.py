@@ -7,7 +7,7 @@ __homepage__ = "http://quandyfactory.com/projects/49/gitiot"
 __copyright__ = "(C) 2009 by Ryan McGreal. Licenced under GNU GPL 2.0\nhttp://www.gnu.org/licenses/old-licenses/gpl-2.0.html"
 
 """
-Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful subset of git's awesome power; i.e. one-button commit and push-to-master for people who want revision control but don't want to learn the command line.
+Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful subset of git's awesome power - i.e. one-button commit and push-to-master for people who want revision control but don't want to learn the command line.
 """
 
 # standard libraries
