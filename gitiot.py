@@ -12,6 +12,7 @@ Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful
 
 # standard libraries
 import os
+import shelve
 import subprocess
 from Tkinter import *
 import tkMessageBox 
@@ -52,7 +53,7 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='', config_file = 'gi
         
         # add master to config
         if master == '':
-            master = raw_input('Enter master alias: ')
+            master = raw_input('Enter alias for remote master: ')
         config['master'] = master.strip()
 
     # try to save the config values for next time
