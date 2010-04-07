@@ -4,5 +4,6 @@ Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful
 
 Stay tuned - more to come soon.
 
+###Notes
 
-
+I expect to use git-python http://gitorious.org/git-python
