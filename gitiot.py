@@ -12,7 +12,6 @@ Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful
 
 # standard libraries
 import os
-import shelve
 import subprocess
 from Tkinter import *
 import tkMessageBox 
@@ -66,8 +65,11 @@ def get_config(config_file=global_config_file):
     try:
         with open(config_file, 'r') as file:
             contents = file.read()
-            lines = [line for line in contents if line.strip() != '' and '=' in line and line.strip()[0] != '#']
+            print 'contents:\n%s' % contents
+            lines = [line for line in contents.split('\n') if line.strip() != '' and '=' in line and line.strip()[0] != '#']
+            print 'lines:\n%s' % lines
             for line in lines:
+                print line
                 key, val = line.split('=')
                 config[key.strip()] = val.strip()
             
@@ -131,5 +133,10 @@ class App:
 if __name__ == '__main__':
     root = Tk()
     root.title(__title__)
+    try:
+        root.wm_iconbitmap('%s/%s' % (os.path.abspath(os.curdir), 'git_icon.bmp'))
+    except:
+        pass
+
     app = App(root)
     root.mainloop()
