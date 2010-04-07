@@ -36,9 +36,9 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
     try:
         with open(config_file, 'r') as file:
             contents = file.read()
-            lines = [line for line in contents if line.strip() != '' and ':' in line and line.strip()[0] != '#']
+            lines = [line for line in contents if line.strip() != '' and '=' in line and line.strip()[0] != '#']
             for line in lines:
-                key, val = line.split(':')
+                key, val = line.split('=')
                 config[key.strip()] = val.strip()
         if repo_dir != '':
             config['repo_dir'] = repo_dir
@@ -53,7 +53,7 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
     try:
         with open(config_file, 'w') as file:
             for key, val in config.items():
-                file.write('%s: %s\n' % (key, val))
+                file.write('%s = %s\n' % (key, val))
     except:
         print 'Could not save config values.'
     
