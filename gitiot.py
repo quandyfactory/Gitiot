@@ -17,7 +17,10 @@ import subprocess
 from Tkinter import *
 import tkMessageBox 
 
-commit_comment = 'Commit performed by gitiot v. %s' % __version__
+global_commit_comment = 'Commit performed by gitiot v. %s' % __version__
+global_config_file = 'gitiot.config'
+global_repo_dir = os.path.abspath(os.curdir)
+global_master = 'origin'
 
 def make_process(command, repo_dir):
     """
@@ -27,35 +30,17 @@ def make_process(command, repo_dir):
     pipe.wait()
     return
 
-def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file = 'gitiot.config'):
+def set_config(repo_dir=global_repo_dir, master=global_master, config_file=global_config_file):
     """
-    Returns a config dictionary with repo_dir and master and manages values in a config file.
+    Sets the config file with repo_dir and master
     """
-    config = {} # initialize config dict
-
-    try:
-        with open(config_file, 'r') as file:
-            contents = file.read()
-            lines = [line for line in contents if line.strip() != '' and '=' in line and line.strip()[0] != '#']
-            for line in lines:
-                key, val = line.split('=')
-                config[key.strip()] = val.strip()
-        if repo_dir != '':
-            config['repo_dir'] = repo_dir
-        if master != '':
-            config['master'] = master
-            
-    except:
-        config['repo_dir'] = repo_dir.strip()
-        config['master'] = master.strip()
-
-    # try to save the config values for next time
     try:
         with open(config_file, 'w') as file:
-            for key, val in config.items():
-                file.write('%s = %s\n' % (key, val))
+            file.write('%s = %s\n' % ('repo_dir', repo_dir))
+            file.write('%s = %s\n' % ('master', master))
     except:
-        print 'Could not save config values.'
+        # fail
+        print 'could not set config values'
     
     # try to add config_file to the git exclude
     exclude_file = '%s/.git/info/exclude' % (repo_dir)
@@ -69,6 +54,28 @@ def get_config(repo_dir=os.path.abspath(os.curdir), master='origin', config_file
         # hey, it was worth a shot
         pass
     
+    return
+    
+
+def get_config(config_file=global_config_file):
+    """
+    Returns a config dictionary with repo_dir and master
+    """
+    config = {} # initialize config dict
+
+    try:
+        with open(config_file, 'r') as file:
+            contents = file.read()
+            lines = [line for line in contents if line.strip() != '' and '=' in line and line.strip()[0] != '#']
+            for line in lines:
+                key, val = line.split('=')
+                config[key.strip()] = val.strip()
+            
+    except:
+        config['repo_dir'] = global_repo_dir.strip()
+        config['master'] = global_master.strip()
+        set_config()
+
     return config
 
 def git_add(repo_dir):
@@ -77,7 +84,7 @@ def git_add(repo_dir):
     """
     return make_process('git add .', repo_dir)
 
-def git_commit(repo_dir, comment=commit_comment):
+def git_commit(repo_dir, comment=global_commit_comment):
     """
     Commits changed files to the repository
     """
@@ -100,7 +107,7 @@ class App:
         
         self.comment = Text(f, width=60, height=6)
         self.comment.pack(side=TOP, padx=10, pady=0)
-        self.comment.insert(1.0, commit_comment)
+        self.comment.insert(1.0, global_commit_comment)
         
         self.button = Button(f, text="Commit", command=self.execute_commit)
         self.button.pack(side=BOTTOM, padx=20, pady=20)
