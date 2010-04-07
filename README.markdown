@@ -60,6 +60,22 @@ Gitiot is designed to be used by people who don't want to use the command line, 
 
     >>> import gitiot
     >>> config = gitiot.get_config()
+    >>> repo_dir = config['repo_dir']
+    >>> master = config['master']
     >>> comment = 'I stubbornly insist on using git on a command line without just, you know, using git'
-    >>> gitiot.git_add(config['repo_dir'])
-    >>> gitiot.git_
+    >>> gitiot.git_add(repo_dir)
+    >>> gitiot.git_commit(repo_dir, comment)
+    >>> if master != '': gitiot.git_push_master(repo_dir, master)
+
+##Planned Enhancements
+
+* Add command line arguments for executing `gitiot.py` so you can run in non-interactive mode and pass in arguments.
+
+* Tkinter is kind of crappy. At least the tab button should move focus from the comment box to the Commit button. There's probably some way to set this behaviour that I should look into.
+
+* Still need to test whether this works on Windows with msysgit.
+
+##Credits
+
+Special thanks for [@adr](http://twitter.adr) for inspiring me to write this in his [cri du coeur](http://twitter.com/adr/status/11716000425) regarding making git accessible to non-techies.
+
