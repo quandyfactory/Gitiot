@@ -21,13 +21,6 @@ global_config_file = 'gitiot.config'
 global_repo_dir = os.path.abspath(os.curdir)
 global_master = 'origin'
 
-def make_process(command, repo_dir):
-    """
-    Executes a command
-    """
-    pipe = subprocess.Popen(command, shell=True, cwd=repo_dir)
-    pipe.wait()
-    return
 
 def set_config(repo_dir=global_repo_dir, master=global_master, config_file=global_config_file):
     """
@@ -52,16 +45,13 @@ def set_config(repo_dir=global_repo_dir, master=global_master, config_file=globa
     except:
         # hey, it was worth a shot
         pass
-    
     return
     
-
 def get_config(config_file=global_config_file):
     """
     Returns a config dictionary with repo_dir and master
     """
     config = {} # initialize config dict
-
     try:
         with open(config_file, 'r') as file:
             contents = file.read()
@@ -72,13 +62,20 @@ def get_config(config_file=global_config_file):
                 print line
                 key, val = line.split('=')
                 config[key.strip()] = val.strip()
-            
     except:
         config['repo_dir'] = global_repo_dir.strip()
         config['master'] = global_master.strip()
         set_config()
-
     return config
+
+
+def make_process(command, repo_dir):
+    """
+    Executes a command 
+    """
+    pipe = subprocess.Popen(command, shell=True, cwd=repo_dir)
+    pipe.wait()
+    return
 
 def git_add(repo_dir):
     """
@@ -90,7 +87,7 @@ def git_commit(repo_dir, comment=global_commit_comment):
     """
     Commits changed files to the repository
     """
-    return make_process('git commit -m \'%s\'' % (comment.replace("'", "\'")), repo_dir)
+    return make_process('git commit -m "%s"' % (comment.replace('"', '\"')), repo_dir)
 
 def git_push_master(repo_dir, master):
     """
@@ -99,23 +96,23 @@ def git_push_master(repo_dir, master):
     return make_process('git push %s master' % (master), repo_dir)
 
 class App:
-    def __init__(self,parent):
 
+    def __init__(self,parent):
         f = Frame(parent)
         f.pack(padx=15, pady=15)
-
         self.comment_label = Label(f, text="Comment")
         self.comment_label.pack(side=TOP, padx=10, pady=0)
-        
         self.comment = Text(f, width=60, height=6)
         self.comment.pack(side=TOP, padx=10, pady=0)
         self.comment.insert(1.0, global_commit_comment)
         self.comment.bind("<Tab>", self.focus_next_window)
-        
         self.button = Button(f, text="Commit", command=self.execute_commit)
         self.button.pack(side=BOTTOM, padx=20, pady=20)
     
     def focus_next_window(self, event):
+        """
+        Fixed tab behaviour in a Tkinter Text control
+        """
         event.widget.tk_focusNext().focus()
         return("break")
 
@@ -132,8 +129,8 @@ class App:
         if master != '':
             git_push_master(repo_dir, master)
             extra_message = ' and pushed to the remote master repository'
-            
         tkMessageBox.showinfo('Changes Committed', 'Your changes were committed%s.' % (extra_message))
+
 
 if __name__ == '__main__':
     root = Tk()
@@ -144,4 +141,3 @@ if __name__ == '__main__':
         pass
     app = App(root)
     root.mainloop()
-    
