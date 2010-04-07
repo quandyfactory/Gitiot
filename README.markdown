@@ -11,10 +11,17 @@ Gitiot is a really simple cross-platform GUI wrapper for the most minimal useful
 
 ###This Version
 
-* Version: 0.12
+* Version: 0.13
 * Release Date: 2010-04-07
 
 ###Revision History
+
+####Version 0.13
+
+* Release Date: 2010-04-07
+* Changes:
+    * Fixed comment quotes in git_commit() so it works on Windows.
+    * Updated README.markdown to include Windows instructions.
 
 ####Version 0.12
 
