@@ -11,10 +11,16 @@ Gitiot is a really simple cross-platform GUI wrapper for the most utterly minima
 
 ###This Version
 
-* Version: 0.13
-* Release Date: 2010-04-07
+* Version: 0.14
+* Release Date: 2011-04-26
 
 ###Revision History
+
+####Version 0.14
+
+* Release Date: 2011-04-26
+* Changes:
+    * Added global gitiot comment to config file.
 
 ####Version 0.13
 
@@ -48,7 +54,7 @@ Gitiot is a really simple cross-platform GUI wrapper for the most utterly minima
 
 You need to have the following installed to run this program:
 
-* [Python](http://www.python.org/download) 2.5.x or 2.6.x
+* [Python](http://www.python.org/download) 2.5+ (but not Python 3)
     * **Note:** On some Linux distros, you may need to install python-tk - just install it using your system's package manager.
 * [Git]() (POSIX) or [Msysgit](http://code.google.com/p/msysgit/) (Windows)
     * **Note:** If using Msysgit on Windows, you must select the "Run Git from the Windows Command Prompt" option under *Adjusting your PATH environment* during installation. 
@@ -87,6 +93,16 @@ If you have no remote master and only want to use the repository locally, remove
 
     master = 
 
+####Default Commit Message
+
+You may want to change the default commit message, which reads, `Commit performed by gitiot v. x.xx`. In that case, you will need to open `gitiot.config` in a text editor and change this line:
+
+    comment = Commit performed by gitiot v. x.xx
+
+replace `Commit performed by gitiot v. x.xx` with whatever default message you would rather use. If would rather have no default message, remove the message and leave the line as:
+
+    comment = 
+
 ###Python Command Line
 
 Gitiot is designed to be used by people who don't want to use the command line, but you can still use it in a Python REPL if the mood strikes you. Just save `gitiot.py` somewhere in your PATH and then import it as a module:
@@ -107,4 +123,3 @@ Gitiot is designed to be used by people who don't want to use the command line, 
 ###Credits
 
 Special thanks for [@adr](http://twitter.com/adr) for inspiring me to write this in his [cri du coeur](http://twitter.com/adr/status/11716000425) regarding making git accessible to non-techies.
-
