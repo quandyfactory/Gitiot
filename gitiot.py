@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 __title__ = 'Gitiot, the one-button git commit GUI'
-__version__ = 0.13
+__version__ = 0.14
+__releasedate__ = '2011-04-27'
 __author__ = "Ryan McGreal ryan@quandyfactory.com"
 __homepage__ = "http://quandyfactory.com/projects/49/gitiot"
 __copyright__ = "(C) 2009 by Ryan McGreal. Licenced under GNU GPL 2.0\nhttp://www.gnu.org/licenses/old-licenses/gpl-2.0.html"
@@ -19,10 +20,11 @@ import tkMessageBox
 global_commit_comment = 'Commit performed by gitiot v. %s' % __version__
 global_config_file = 'gitiot.config'
 global_repo_dir = os.path.abspath(os.curdir)
+print 'Your current directory is: %s.' % global_repo_dir
 global_master = 'origin'
 
 
-def set_config(repo_dir=global_repo_dir, master=global_master, config_file=global_config_file):
+def set_config(repo_dir=global_repo_dir, master=global_master, config_file=global_config_file, comment=global_commit_comment):
     """
     Sets the config file with repo_dir and master
     """
@@ -30,9 +32,11 @@ def set_config(repo_dir=global_repo_dir, master=global_master, config_file=globa
         with open(config_file, 'w') as file:
             file.write('%s = %s\n' % ('repo_dir', repo_dir))
             file.write('%s = %s\n' % ('master', master))
+            file.write('%s = %s\n' % ('comment', comment))
+            print 'Config file created.'
     except:
         # fail
-        print 'could not set config values'
+        print 'Error: Could not set config values.'
     
     # try to add config_file to the git exclude
     exclude_file = '%s/.git/info/exclude' % (repo_dir)
@@ -42,8 +46,10 @@ def set_config(repo_dir=global_repo_dir, master=global_master, config_file=globa
         if config_file not in contents:
             with open(exclude_file, 'a') as file:
                 file.write('%s\n' % config_file)
+                print 'gitiot.config added to git exclude file.'
     except:
         # hey, it was worth a shot
+        print 'Error: Could not add gitiot.config to git exclude file.'
         pass
     return
     
@@ -65,6 +71,7 @@ def get_config(config_file=global_config_file):
     except:
         config['repo_dir'] = global_repo_dir.strip()
         config['master'] = global_master.strip()
+        config['comment'] = global_commit_comment.strip()
         set_config()
     return config
 
@@ -98,13 +105,14 @@ def git_push_master(repo_dir, master):
 class App:
 
     def __init__(self,parent):
+        config = get_config()
         f = Frame(parent)
         f.pack(padx=15, pady=15)
         self.comment_label = Label(f, text="Comment")
         self.comment_label.pack(side=TOP, padx=10, pady=0)
         self.comment = Text(f, width=60, height=6)
         self.comment.pack(side=TOP, padx=10, pady=0)
-        self.comment.insert(1.0, global_commit_comment)
+        self.comment.insert(1.0, config['comment'])
         self.comment.bind("<Tab>", self.focus_next_window)
         self.button = Button(f, text="Commit", command=self.execute_commit)
         self.button.pack(side=BOTTOM, padx=20, pady=20)
