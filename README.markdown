@@ -20,6 +20,7 @@ You need to have the following installed to run this program:
 
 * [Python](http://www.python.org/download) 2.5+ (but not Python 3)
     * **Note:** On some Linux distros, you may need to install python-tk - just install it using your system's package manager.
+                                                                         - 
 * [Git]() (POSIX) or [Msysgit](http://code.google.com/p/msysgit/) (Windows)
     * **Note:** If using Msysgit on Windows, you must select the "Run Git from the Windows Command Prompt" option under *Adjusting your PATH environment* during installation. 
 
