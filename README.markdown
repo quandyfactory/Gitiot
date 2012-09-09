@@ -14,42 +14,6 @@ Gitiot is a really simple cross-platform GUI wrapper for the most utterly minima
 * Version: 0.14
 * Release Date: 2011-04-26
 
-###Revision History
-
-####Version 0.14
-
-* Release Date: 2011-04-26
-* Changes:
-    * Added global gitiot comment to config file.
-
-####Version 0.13
-
-* Release Date: 2010-04-07
-* Changes:
-    * Fixed comment quotes in git_commit() so it works on Windows.
-    * Updated README.markdown to include Windows instructions.
-
-####Version 0.12
-
-* Release Date: 2010-04-07
-* Changes:
-    * Fixed tab on Comment so it actually tabs to next control as per [this article](http://stackoverflow.com/questions/1450180/how-can-i-change-the-focus-from-one-text-box-to-another-in-python-tkinter)
-    
-####Version 0.11
-
-* Release Date: 2010-04-07
-* Changes:
-    * Split config functions into get_config() and set_config()    
-    * Created global default variables for repo_dir, config file and named remote (master)
-    * Fixed get_config() bug that wasn't splitting config file contents into a list of lines
-    * Added an icon that apparently only works in Windows
-
-####Version 0.1
-
-* Release Date: 2010-04-06
-* Changes:
-    * First commit
-
 ###Requirements
 
 You need to have the following installed to run this program:
@@ -119,6 +83,42 @@ Gitiot is designed to be used by people who don't want to use the command line, 
 ###Planned Enhancements
 
 * Add command line arguments for executing `gitiot.py` so you can run in non-interactive mode and pass in arguments.
+
+###Revision History
+
+####Version 0.14
+
+* Release Date: 2011-04-26
+* Changes:
+    * Added global gitiot comment to config file.
+
+####Version 0.13
+
+* Release Date: 2010-04-07
+* Changes:
+    * Fixed comment quotes in git_commit() so it works on Windows.
+    * Updated README.markdown to include Windows instructions.
+
+####Version 0.12
+
+* Release Date: 2010-04-07
+* Changes:
+    * Fixed tab on Comment so it actually tabs to next control as per [this article](http://stackoverflow.com/questions/1450180/how-can-i-change-the-focus-from-one-text-box-to-another-in-python-tkinter)
+    
+####Version 0.11
+
+* Release Date: 2010-04-07
+* Changes:
+    * Split config functions into get_config() and set_config()    
+    * Created global default variables for repo_dir, config file and named remote (master)
+    * Fixed get_config() bug that wasn't splitting config file contents into a list of lines
+    * Added an icon that apparently only works in Windows
+
+####Version 0.1
+
+* Release Date: 2010-04-06
+* Changes:
+    * First commit
 
 ###Credits
 
